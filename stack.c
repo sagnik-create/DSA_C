@@ -25,10 +25,8 @@ int main(){
         }
 
         else{
-            int i;
-            for(i = top; i>=0; i--){
-                printf("%d",stack[i]);
-            }
+            printf("The pop element is %d",stack[top]);
+            top--;
         }
     }
     void display(){
@@ -43,13 +41,12 @@ int main(){
         }
     }
     int choice;
-    printf("Operation Perform on Stack");
-    printf("\n");
-    printf("1 for Push \n 2 for Pop \n 3 for Display \n 4 for exit \n");
-    printf("Enter your Choice");
-    scanf("%d",&choice);
     do
-    {
+    {   printf("\nOperation Perform on Stack");
+        printf("\n");
+        printf("1 for Push \n 2 for Pop \n 3 for Display \n 4 for exit \n");
+        printf("Enter your Choice");
+        scanf("%d",&choice);
         switch (choice){
             case 1:
                 push();
