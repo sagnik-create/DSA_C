@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <unistd.h>
+
 
 void swap(int *num1, int *num2) {
     int temp = *num1;
