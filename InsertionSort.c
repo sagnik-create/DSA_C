@@ -28,8 +28,15 @@ void printArray(int arr[], int n) {
 
 // Main function
 int main() {
-    int arr[] = {12, 11, 13, 5, 6};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int n;
+    printf("Enter the size of the array");
+    scanf("%d",&n);
+    int arr[n];
+    printf("Create an array: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d",&arr[i]);
+    }
+
 
     printf("Original array: \n");
     printArray(arr, n);
