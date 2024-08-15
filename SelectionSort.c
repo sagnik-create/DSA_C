@@ -11,7 +11,7 @@ void SelSort(int arr[],int size){
     for (i=0 ; i<size-1; i++){
         min = i;
     }
-    for (j=0; j<size; j++){
+    for (j=0; j<size ; j++){
         if(arr[j] <= arr[min]){
             min = j;
         }
