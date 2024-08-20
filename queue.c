@@ -49,7 +49,7 @@ int main(){
     do
     {
         printf("\nqueue operation");
-        printf("\n 1 for enque\n 2 for deque\n 3 for display\n 4 for exit");
+        printf("\n 1 for enqueue\n 2 for dequeue\n 3 for display\n 4 for exit");
         scanf("%d",&choice);
         switch (choice)
         {
