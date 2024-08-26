@@ -8,10 +8,9 @@ void swap(int *num1, int *num2) {
 
 void SelSort(int arr[],int size){
     int i,j,min;
-    for (i=0 ; i<size-1; i++){
+    for (i=0 ; i<size; i++){
         min = i;
-    }
-    for (j=0; j<size ; j++){
+    for (j=i+1; j<size ; j++){
         if(arr[j] <= arr[min]){
             min = j;
         }
@@ -20,9 +19,11 @@ void SelSort(int arr[],int size){
         }
     }
 
+    
+    }
     for (int k = 0; k < size; k++) {
         printf("%d ", arr[k]);
-    }
+}
 }
 
 int main(){
@@ -38,4 +39,5 @@ int main(){
     printf("Sorted array: ");
     SelSort(arr,n);
     
+    return 0;
 }

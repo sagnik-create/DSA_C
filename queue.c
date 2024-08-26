@@ -50,6 +50,7 @@ int main(){
     {
         printf("\nqueue operation");
         printf("\n 1 for enqueue\n 2 for dequeue\n 3 for display\n 4 for exit");
+        printf("\nEnter Your Choice");
         scanf("%d",&choice);
         switch (choice)
         {
