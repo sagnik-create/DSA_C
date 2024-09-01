@@ -13,19 +13,19 @@ void quickSort(int arr[], int sta, int end) {
         i = pivot + 1;
         j = end;
         while (i <= j) {
-            while (arr[i] < arr[pivot] && i < end) {
+            while (arr[i] <= arr[pivot] && i <= end) {  // Ensure i does not go beyond end
                 i++;
             }
             while (arr[j] > arr[pivot]) {
                 j--;
             }
-            if (i < j) {
+            if (i < j) {  // Swap only when i < j
                 swap(&arr[i], &arr[j]);
             }
         }
-        swap(&arr[pivot], &arr[j]);
-        quickSort(arr, sta, j - 1);
-        quickSort(arr, j + 1, end);
+        swap(&arr[pivot], &arr[j]);  // Correct swap of pivot element
+        quickSort(arr, sta, j - 1);  // Recursively sort the left partition
+        quickSort(arr, j + 1, end);  // Recursively sort the right partition
     }
 }
 
