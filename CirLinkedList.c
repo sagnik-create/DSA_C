@@ -9,18 +9,23 @@ struct Node {
 
 struct Node* head = NULL;
 
-// Function to create a node
-struct Node* create() {
-    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+// Function to create a node using void
+void create(struct Node** ptr) {
+    *ptr = (struct Node*)malloc(sizeof(struct Node));
+    if (*ptr == NULL) {
+        printf("Memory allocation failed\n");
+        return;
+    }
     printf("Enter the value: ");
-    scanf("%d", &ptr->data);
-    ptr->next = NULL;
-    return ptr;
+    scanf("%d", &(*ptr)->data);
+    (*ptr)->next = NULL;
 }
 
 // Function to insert a node at the end
 void insert_at_end() {
-    struct Node* ptr = create();
+    struct Node* ptr;
+    create(&ptr); // Creates a new node
+
     if (head == NULL) {
         head = ptr;
         ptr->next = head;
@@ -36,7 +41,9 @@ void insert_at_end() {
 
 // Function to insert a node at the beginning
 void insert_at_beg() {
-    struct Node* ptr = create();
+    struct Node* ptr;
+    create(&ptr); // Creates a new node
+
     if (head == NULL) {
         head = ptr;
         ptr->next = head;
@@ -67,7 +74,9 @@ void addNodeAtPosition() {
         return;
     }
 
-    struct Node* ptr = create();
+    struct Node* ptr;
+    create(&ptr); // Creates a new node
+
     struct Node* temp = head;
     for (int i = 1; i < position - 1; i++) {
         temp = temp->next;
@@ -175,15 +184,14 @@ int main() {
     
     do {
         printf("\nCircular Linked List Operations:\n");
-        printf("1. Create a node\n");
-        printf("2. Insert node at the end\n");
-        printf("3. Insert node at the beginning\n");
-        printf("4. Insert node at a specific position\n");
-        printf("5. Remove node from the beginning\n");
-        printf("6. Remove node from the end\n");
-        printf("7. Remove node from a specific position\n");
-        printf("8. Display the list\n");
-        printf("9. Exit\n");
+        printf("1. Insert node at the end\n");
+        printf("2. Insert node at the beginning\n");
+        printf("3. Insert node at a specific position\n");
+        printf("4. Remove node from the beginning\n");
+        printf("5. Remove node from the end\n");
+        printf("6. Remove node from a specific position\n");
+        printf("7. Display the list\n");
+        printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -193,34 +201,30 @@ int main() {
                 break;
 
             case 2:
-                insert_at_end();
-                break;
-
-            case 3:
                 insert_at_beg();
                 break;
 
-            case 4:
+            case 3:
                 addNodeAtPosition();
                 break;
 
-            case 5:
+            case 4:
                 removeNodeBeginning();
                 break;
 
-            case 6:
+            case 5:
                 removeNodeEnd();
                 break;
 
-            case 7:
+            case 6:
                 removeNodeAtPosition();
                 break;
 
-            case 8:
+            case 7:
                 display();
                 break;
 
-            case 9:
+            case 8:
                 printf("Exiting program...\n");
                 break;
 
@@ -228,7 +232,7 @@ int main() {
                 printf("Invalid choice! Please try again.\n");
                 break;
         }
-    } while (choice != 9);
+    } while (choice != 8);
 
     return 0;
 }
