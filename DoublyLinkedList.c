@@ -129,8 +129,32 @@ void insert_at_pos(){
      
 
 };
-void delete_at_beg();
-void delete_at_end();
+void delete_at_beg(){
+    struct node *ptr = head;
+
+
+    if (head == NULL){
+        printf("List is empty")
+    }
+
+    else{
+        head = head->next; 
+        head->prev = NULL
+        free(ptr);
+
+    }
+};
+
+void delete_at_end(){
+    struct node *ptr = head;
+    while(ptr->next != NULL){
+        ptr = ptr->next
+    }
+
+    ptr->prev->next = NULL;
+    free(ptr);
+};
+
 void delete_at_pos();
 void display(){
     while (ptr != NULL)
