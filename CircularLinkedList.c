@@ -11,7 +11,6 @@ void delete_at_pos();
 void display();
 
 struct node {
-    struct node *prev;
     int data;
     struct node *next;
 };
@@ -21,7 +20,7 @@ struct node* head = NULL;
 int main() {
     int choice;
     do {
-        printf("\nCircular Doubly Linked List Operations \n");
+        printf("\nCircular Singly Linked List Operations \n");
         printf("1. Create a new Node\n");
         printf("2. Insert the node at beginning\n");
         printf("3. Insert the node at end\n");
@@ -76,18 +75,18 @@ void create() {
     
     printf("Enter node data: ");
     scanf("%d", &ptr->data);
-    ptr->next = ptr->prev = NULL;
+    ptr->next = NULL;
 
     if (head == NULL) {
         head = ptr;
         head->next = head;
-        head->prev = head;
     } else {
-        temp = head->prev;  // Last node
+        temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
         temp->next = ptr;
-        ptr->prev = temp;
         ptr->next = head;
-        head->prev = ptr;
     }
 }
 
@@ -97,17 +96,17 @@ void insert_at_beg() {
     
     printf("Enter node data: ");
     scanf("%d", &ptr->data);
-    ptr->next = ptr->prev = NULL;
+    ptr->next = NULL;
 
     if (head == NULL) {
         head = ptr;
         head->next = head;
-        head->prev = head;
     } else {
-        temp = head->prev;  // Last node
+        temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
         ptr->next = head;
-        ptr->prev = temp;
-        head->prev = ptr;
         temp->next = ptr;
         head = ptr;
     }
@@ -119,18 +118,18 @@ void insert_at_end() {
     
     printf("Enter node data: ");
     scanf("%d", &ptr->data);
-    ptr->next = ptr->prev = NULL;
+    ptr->next = NULL;
 
     if (head == NULL) {
         head = ptr;
         head->next = head;
-        head->prev = head;
     } else {
-        temp = head->prev;  // Last node
+        temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
         temp->next = ptr;
-        ptr->prev = temp;
         ptr->next = head;
-        head->prev = ptr;
     }
 }
 
@@ -141,7 +140,7 @@ void insert_at_pos() {
     
     printf("Enter node data: ");
     scanf("%d", &ptr->data);
-    ptr->next = ptr->prev = NULL;
+    ptr->next = NULL;
 
     printf("Enter the position where you want to insert the node: ");
     scanf("%d", &pos);
@@ -157,56 +156,60 @@ void insert_at_pos() {
     }
 
     ptr->next = temp->next;
-    ptr->prev = temp;
-    temp->next->prev = ptr;
     temp->next = ptr;
 }
 
 void delete_at_beg() {
-    struct node *temp;
+    struct node *temp, *last;
     if (head == NULL) {
         printf("List is empty!\n");
         return;
     }
 
-    temp = head;
-
     if (head->next == head) {
+        temp = head;
         head = NULL;
+        printf("Deleted node: %d\n", temp->data);
+        free(temp);
     } else {
-        struct node *last = head->prev;
+        temp = head;
+        last = head;
+        while (last->next != head) {
+            last = last->next;
+        }
         head = head->next;
-        head->prev = last;
         last->next = head;
+        printf("Deleted node: %d\n", temp->data);
+        free(temp);
     }
-
-    printf("Deleted node: %d\n", temp->data);
-    free(temp);
 }
 
 void delete_at_end() {
-    struct node *temp;
+    struct node *temp, *prev;
     if (head == NULL) {
         printf("List is empty!\n");
         return;
     }
 
-    temp = head->prev;  // Last node
-
     if (head->next == head) {
+        temp = head;
         head = NULL;
+        printf("Deleted node: %d\n", temp->data);
+        free(temp);
     } else {
-        struct node *prev = temp->prev;
+        temp = head;
+        while (temp->next != head) {
+            prev = temp;
+            temp = temp->next;
+        }
         prev->next = head;
-        head->prev = prev;
+        printf("Deleted node: %d\n", temp->data);
+        free(temp);
     }
-
-    printf("Deleted node: %d\n", temp->data);
-    free(temp);
 }
 
 void delete_at_pos() {
-    struct node *temp;
+    struct node *temp, *prev;
     int pos, i;
 
     if (head == NULL) {
@@ -224,12 +227,11 @@ void delete_at_pos() {
 
     temp = head;
     for (i = 1; i < pos && temp->next != head; i++) {
+        prev = temp;
         temp = temp->next;
     }
 
-    temp->prev->next = temp->next;
-    temp->next->prev = temp->prev;
-
+    prev->next = temp->next;
     printf("Deleted node: %d\n", temp->data);
     free(temp);
 }
@@ -241,7 +243,7 @@ void display() {
         return;
     }
 
-    printf("Circular Doubly Linked List: ");
+    printf("Circular Singly Linked List: ");
     do {
         printf("%d ", temp->data);
         temp = temp->next;
